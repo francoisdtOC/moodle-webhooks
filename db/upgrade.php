@@ -24,5 +24,23 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_local_webhooks_upgrade(int $oldversion) {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+
+    if ($oldversion < 2022072900) {
+        //Increase the "token" column size from "char (255)" to "text"
+        //https://github.com/valentineus/moodle-webhooks/issues/27
+        $table = new xmldb_table('local_webhooks_service');
+
+        $field = new xmldb_field('token');
+        $field->set_attributes(XMLDB_TYPE_TEXT, null, null, null, null, null);
+        try {
+            $dbman->change_field_type($table, $field);
+        } catch (moodle_exception $e) {}
+
+        upgrade_plugin_savepoint(true, 2022072900, 'local', 'webhooks');
+    }
+
     return true;
 }

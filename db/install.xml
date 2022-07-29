@@ -11,7 +11,7 @@
                 <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name of the service." />
                 <FIELD NAME="point" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Point of delivery of notifications." />
                 <FIELD NAME="status" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false" DEFAULT="0" COMMENT="Current status of the service." />
-                <FIELD NAME="token" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Token for verification of requests." />
+                <FIELD NAME="token" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Token for verification of requests." />
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" />
